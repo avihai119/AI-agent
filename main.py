@@ -20,18 +20,21 @@ def main():
     args = parser.parse_args()
     
     messages = [types.Content(role="user", parts=[types.Part(text=args.user_prompt)])]
+    if args.verbose:
+        print(f"User prompt: {args.user_prompt}\n") 
+    generate_response(client, messages, args.verbose)
+    
 
+def generate_response(client, messages, verbose):
     response = client.models.generate_content(
-        model='gemini-2.5-flash',
-        contents=messages
+    model='gemini-2.5-flash',
+    contents=messages
     )
-    
-    
     if response.usage_metadata is None:
         raise RuntimeError("No metadata detected")
-    
-    if args.verbose:
-        print(f"User prompt: {args.user_prompt}")
+
+    if verbose:
+           
         print(f"Prompt tokens: {response.usage_metadata.prompt_token_count}")
         print(f"Response tokens: {response.usage_metadata.candidates_token_count}")
 
