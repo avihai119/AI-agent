@@ -5,7 +5,7 @@ def test_get_files_info():
     print(get_files_info("calculator", "."))
     print("Result for 'pkg' directory:\n")
     print(get_files_info("calculator","pkg"))
-    print("Result for '/bin' directory\n")
+    print("Result for '/bin' directory:\n")
     print(get_files_info("calculator", "/bin"))
     print("Result for '../' directory:\n")
     print(get_files_info("calculator", "../"))
