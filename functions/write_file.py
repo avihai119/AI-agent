@@ -1,5 +1,26 @@
 import os
 
+from google.genai import types
+
+schema_write_file = types.FunctionDeclaration(
+    name="write_file",
+    description="Write/overwrite to the target file in a specified file path relative to the working directory, providing error or success messages of the write output",
+    parameters=types.Schema(
+        type=types.Type.OBJECT,
+        properties={
+            "file_path": types.Schema(
+                type=types.Type.STRING,
+                description="File path to write/overwrite to the target file, relative to the working directory"
+            ),
+            "content": types.Schema(
+                type=types.Type.STRING,
+                description="Content to write/overwrite to the target file"
+            )
+        },
+        required=["file_path", "content"]
+    ),
+)
+
 def write_file(working_directory, file_path, content):
     try:
         abs_pwd_path = os.path.abspath(working_directory)
